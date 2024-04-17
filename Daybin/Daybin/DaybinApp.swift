@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct DaybinApp: App {
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TodoView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
+

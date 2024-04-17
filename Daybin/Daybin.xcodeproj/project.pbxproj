@@ -15,6 +15,9 @@
 		E82348AD2BCF98CF00B622C4 /* Daybin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E82348AB2BCF98CF00B622C4 /* Daybin.xcdatamodeld */; };
 		E82348B72BCF9C8900B622C4 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82348B62BCF9C8900B622C4 /* CalendarView.swift */; };
 		E82348B92BCF9FAC00B622C4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82348B82BCF9FAC00B622C4 /* ProfileView.swift */; };
+		E82348C02BCFC01900B622C4 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82348BF2BCFC01900B622C4 /* CellView.swift */; };
+		E82348C42BCFC35900B622C4 /* CalendarGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82348C32BCFC35900B622C4 /* CalendarGridView.swift */; };
+		E82348C82BCFD83F00B622C4 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82348C72BCFD83F00B622C4 /* TodoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		E82348AC2BCF98CF00B622C4 /* Daybin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Daybin.xcdatamodel; sourceTree = "<group>"; };
 		E82348B62BCF9C8900B622C4 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E82348B82BCF9FAC00B622C4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E82348BF2BCFC01900B622C4 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		E82348C32BCFC35900B622C4 /* CalendarGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGridView.swift; sourceTree = "<group>"; };
+		E82348C72BCFD83F00B622C4 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,9 @@
 				E82348A42BCF98CF00B622C4 /* Assets.xcassets */,
 				E82348AB2BCF98CF00B622C4 /* Daybin.xcdatamodeld */,
 				E82348A62BCF98CF00B622C4 /* Preview Content */,
+				E82348BF2BCFC01900B622C4 /* CellView.swift */,
+				E82348C32BCFC35900B622C4 /* CalendarGridView.swift */,
+				E82348C72BCFD83F00B622C4 /* TodoView.swift */,
 			);
 			path = Daybin;
 			sourceTree = "<group>";
@@ -153,8 +162,11 @@
 				E82348AA2BCF98CF00B622C4 /* Persistence.swift in Sources */,
 				E82348A32BCF98CC00B622C4 /* ContentView.swift in Sources */,
 				E82348AD2BCF98CF00B622C4 /* Daybin.xcdatamodeld in Sources */,
+				E82348C42BCFC35900B622C4 /* CalendarGridView.swift in Sources */,
 				E82348B92BCF9FAC00B622C4 /* ProfileView.swift in Sources */,
+				E82348C82BCFD83F00B622C4 /* TodoView.swift in Sources */,
 				E82348A12BCF98CC00B622C4 /* DaybinApp.swift in Sources */,
+				E82348C02BCFC01900B622C4 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

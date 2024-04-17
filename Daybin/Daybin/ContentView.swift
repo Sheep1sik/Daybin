@@ -10,11 +10,16 @@ import CoreData
 
 struct ContentView: View {
     
+    @State private var isPresented = true
+    
     var body: some View {
         NavigationView {
-            VStack(content: {
-                
-            })
+            ZStack {
+                VStack(content: {
+                    CalendarView()
+                    Spacer()
+                })
+            }
         }
     }
 }
