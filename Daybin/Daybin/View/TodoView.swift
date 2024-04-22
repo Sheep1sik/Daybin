@@ -8,75 +8,73 @@
 import SwiftUI
 
 struct TodoView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
-
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Todo.todo, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
-
+    private var todos: FetchedResults<Todo>
+    
     var body: some View {
-        NavigationView {
+        VStack {
+            HStack{
+                Text("to do list")
+                    .font(.title)
+                    .padding(.leading, 15)
+                Spacer()
+            }
+            .padding(.leading, 15)
+            // 수평 선
+            Rectangle()
+                .frame(height: 1)
+                .foregroundColor(Color("ColorGray"))
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                if !todos.isEmpty {
+                    ForEach(self.todos, id: \.self) { todo in
+                        TodoItemView(todoTitle: todo.todo ?? "제목 없음")
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                    .onDelete(perform: deleteItems)
                 }
             }
-            Text("Select an item")
+            .padding(.top, -7)
+            .listStyle(.plain)
         }
     }
-
+    
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
+            let newItem = Todo(context: viewContext)
+            newItem.id = UUID()
             newItem.timestamp = Date()
-
+            
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            offsets.map { todos[$0] }.forEach(viewContext.delete)
+            
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
+
 }
 
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
-    formatter.timeStyle = .medium
+    formatter.timeStyle = .none // 시간 스타일을 사용하지 않음
     return formatter
 }()
 

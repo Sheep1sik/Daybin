@@ -9,10 +9,16 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
         Text("ContentView")
+        
+        Spacer()
+        
+        TodoView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .frame(height: 250)
     }
 }
 #Preview {
-    return ContentView()
+    return ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
