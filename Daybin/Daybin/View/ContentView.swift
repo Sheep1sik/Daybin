@@ -16,7 +16,7 @@ struct ContentView: View {
         Spacer()
         
         TodoView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .frame(height: 250)
+            .frame(height: 300)
     }
 }
 #Preview {

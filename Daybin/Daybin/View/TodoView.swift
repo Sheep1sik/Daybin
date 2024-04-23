@@ -15,15 +15,28 @@ struct TodoView: View {
         animation: .default)
     private var todos: FetchedResults<Todo>
     
+    @State var addItemButton: Bool = false
+    @State var addTodo: String = ""
+    
     var body: some View {
         VStack {
             HStack{
                 Text("to do list")
                     .font(.title)
-                    .padding(.leading, 15)
+                    .padding(.leading, 1)
                 Spacer()
+                
+                Button(action: {
+                    addItemButton.toggle()
+                }, label: {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.gray)
+                })
             }
             .padding(.leading, 15)
+            .padding(.trailing, 18)
             // 수평 선
             Rectangle()
                 .frame(height: 1)
@@ -35,24 +48,12 @@ struct TodoView: View {
                     }
                     .onDelete(perform: deleteItems)
                 }
+                if addItemButton {
+                    AddTodoItemView(addTodo: $addTodo, addItemButton: $addItemButton)
+                }
             }
             .padding(.top, -7)
             .listStyle(.plain)
-        }
-    }
-    
-    private func addItem() {
-        withAnimation {
-            let newItem = Todo(context: viewContext)
-            newItem.id = UUID()
-            newItem.timestamp = Date()
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
         }
     }
     
@@ -74,7 +75,7 @@ struct TodoView: View {
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
-    formatter.timeStyle = .none // 시간 스타일을 사용하지 않음
+    formatter.timeStyle = .none 
     return formatter
 }()
 

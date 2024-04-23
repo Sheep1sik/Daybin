@@ -16,6 +16,7 @@
 		E84609E62BD64BFF00C197BA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E84609E52BD64BFF00C197BA /* Launch Screen.storyboard */; };
 		E84609E82BD6511100C197BA /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84609E72BD6511100C197BA /* TodoView.swift */; };
 		E84609EB2BD6535B00C197BA /* TodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84609EA2BD6535B00C197BA /* TodoItemView.swift */; };
+		E8460A0C2BD78BE300C197BA /* AddTodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A0B2BD78BE300C197BA /* AddTodoItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		E84609E52BD64BFF00C197BA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E84609E72BD6511100C197BA /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		E84609EA2BD6535B00C197BA /* TodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemView.swift; sourceTree = "<group>"; };
+		E8460A0B2BD78BE300C197BA /* AddTodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				E84609D42BD64BB300C197BA /* ContentView.swift */,
 				E84609E72BD6511100C197BA /* TodoView.swift */,
 				E84609EA2BD6535B00C197BA /* TodoItemView.swift */,
+				E8460A0B2BD78BE300C197BA /* AddTodoItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				E84609DF2BD64BB500C197BA /* Daybin.xcdatamodeld in Sources */,
 				E84609D32BD64BB300C197BA /* DaybinApp.swift in Sources */,
 				E84609EB2BD6535B00C197BA /* TodoItemView.swift in Sources */,
+				E8460A0C2BD78BE300C197BA /* AddTodoItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

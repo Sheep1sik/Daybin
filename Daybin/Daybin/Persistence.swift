@@ -15,8 +15,8 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for i in 0..<5 {
             let newItem = Todo(context: viewContext)
-            newItem.timestamp = Date()
             newItem.id = UUID()
+            newItem.calendarDay = "2024-04-0\(i)"
             newItem.todo = "\(i) 번째 Todo !"
         }
         do {

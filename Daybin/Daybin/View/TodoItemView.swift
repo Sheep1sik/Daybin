@@ -13,11 +13,7 @@ struct TodoItemView: View {
     
     var body: some View {
         HStack{
-            if todoChecked == false {
-                Text(todoTitle)
-            } else {
-                Text(todoTitle).strikethrough()
-            }
+            todoChecked ? Text(todoTitle).strikethrough() : Text(todoTitle)
             
             Spacer()
             
@@ -25,22 +21,15 @@ struct TodoItemView: View {
                 print("\(todoChecked)")
                 todoChecked = !todoChecked
             }, label: {
-                if todoChecked == false {
-                    Image(systemName: "circle")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(Color("ColorGray"))
-                } else {
-                    Image(systemName: "checkmark.circle.fill")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(Color("ColorGray"))
-                }
+                
+                Image(systemName: todoChecked ? "checkmark.circle.fill" : "circle")
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(Color("ColorGray"))
             })
         } //: HSTACK
-        .padding(.top, 15)
-        .padding(.bottom, 15)
-        .padding(.trailing, 20)
+        .padding(.top, 7)
+        .padding(.bottom, 7)
     }
 }
 
