@@ -13,10 +13,10 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for i in 0..<5 {
+        for i in 0..<9 {
             let newItem = Todo(context: viewContext)
             newItem.id = UUID()
-            newItem.calendarDay = "2024-04-0\(i)"
+            newItem.calenderDay = "2024-04-2\(i)"
             newItem.todo = "\(i) 번째 Todo !"
         }
         do {

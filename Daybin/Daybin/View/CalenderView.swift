@@ -10,13 +10,20 @@ import SwiftUI
 struct CalenderView: View {
     // MARK: - PROPERTY
     
-    @State private var date = Date()
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Todo.todo, ascending: true)],
+        animation: .default)
+    private var todos: FetchedResults<Todo>
+    
+    @State var date = Date()
     @State private var todayDate = Date()
     @State private var offset: CGSize = CGSize()
     @State var clickedDates: Set<Date> = []
-    
     @State var clickDay = false
     @State var today = true
+    
+    @Binding var userCalenderDate: String
     
     
     // MARK: - FUNCTION
@@ -53,7 +60,7 @@ struct CalenderView: View {
                 })
                 .foregroundColor(.gray)
                 
-                Text(date, formatter: CalenderView.dateFormatter)
+                Text(date, formatter: CalenderView.calenderTitleDateFormatter)
                     .font(.title3)
                 
                 Button(action: {
@@ -78,37 +85,26 @@ struct CalenderView: View {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 7), content: {
                     ForEach(0 ..< daysInMonth + firstWeekday, id: \.self) { index in
                         if index < firstWeekday {
-                            CalenderItemView()
+                            ZStack {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(.clear)
+                                    CalenderItemView()
+                                }
+                                Circle()
+                                    .frame(width: 7,height: 7)
+                                    .foregroundColor(.clear)
+                                    .padding(.top, 60)
+                            }
+                            
                         } else {
-                            let date = getDate(for: index - firstWeekday)
+                            let getDate = getDate(for: index - firstWeekday)
                             let day = index - firstWeekday + 1
-                            let clicked = clickedDates.contains(date)
+                            let clicked = clickedDates.contains(getDate)
                             
                             if dateValidation() && day == Calendar.current.component(.day, from: todayDate){
                                 if today {
                                     ZStack {
-                                        Circle()
-                                            .foregroundColor(.gray)
-                                        CalenderItemView()
-                                            .overlay(
-                                                Text(String(day))
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(.white)
-                                            )
-                                            .onTapGesture {
-                                                if clicked {
-                                                    clickedDates.remove(date)
-                                                }
-                                                else {
-                                                    today = false
-                                                    clickedDates.removeAll()
-                                                    clickedDates.insert(date)
-                                                }
-                                            }
-                                    }
-                                }
-                                else {
-                                    if clicked {
                                         ZStack {
                                             Circle()
                                                 .foregroundColor(.gray)
@@ -118,31 +114,96 @@ struct CalenderView: View {
                                                         .fontWeight(.bold)
                                                         .foregroundColor(.white)
                                                 )
-                                                .onTapGesture {
-                                                    if clicked {
-                                                        clickedDates.remove(date)
-                                                    }
-                                                    else {
-                                                        today = false
-                                                        clickedDates.removeAll()
-                                                        clickedDates.insert(date)
-                                                    }
-                                                }
                                         }
-                                    } else {
-                                        CalenderItemView()
-                                            .overlay(
-                                                Text(String(day))
-                                                    .fontWeight(.bold)
-                                            )
+                                        if todoValidation(for: day) {
+                                            Circle()
+                                                .frame(width: 7,height: 7)
+                                                .foregroundColor(Color("ColorGray"))
+                                                .padding(.top, 60)
+                                        }
+                                        else {
+                                            Circle()
+                                                .frame(width: 7,height: 7)
+                                                .foregroundColor(.clear)
+                                                .padding(.top, 60)
+                                        }
+                                    }
+                                    .padding(.top, -15)
                                             .onTapGesture {
-                                                if clicked {
-                                                    clickedDates.remove(date)
-                                                }
-                                                else {
+                                                if !clicked {
+                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
                                                     today = false
                                                     clickedDates.removeAll()
-                                                    clickedDates.insert(date)
+                                                    clickedDates.insert(getDate)
+                                                }
+                                            }
+                                }
+                                else {
+                                    if clicked {
+                                        ZStack {
+                                            ZStack {
+                                                Circle()
+                                                    .foregroundColor(.gray)
+                                                CalenderItemView()
+                                                    .overlay(
+                                                        Text(String(day))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    )
+                                            }
+                                            if todoValidation(for: day) {
+                                                Circle()
+                                                    .frame(width: 7,height: 7)
+                                                    .foregroundColor(Color("ColorGray"))
+                                                    .padding(.top, 60)
+                                            }
+                                            else {
+                                                Circle()
+                                                    .frame(width: 7,height: 7)
+                                                    .foregroundColor(.clear)
+                                                    .padding(.top, 60)
+                                            }
+                                        }
+                                        .padding(.top, -15)
+                                                .onTapGesture {
+                                                    if !clicked {
+                                                        userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                        today = false
+                                                        clickedDates.removeAll()
+                                                        clickedDates.insert(getDate)
+                                                    }
+                                                }
+                                    } else {
+                                        ZStack {
+                                            ZStack {
+                                                Circle()
+                                                    .foregroundColor(.clear)
+                                                CalenderItemView()
+                                                    .overlay(
+                                                        Text(String(day))
+                                                            .fontWeight(.bold)
+                                                    )
+                                            }
+                                            if todoValidation(for: day) {
+                                                Circle()
+                                                    .frame(width: 7,height: 7)
+                                                    .foregroundColor(Color("ColorGray"))
+                                                    .padding(.top, 60)
+                                            }
+                                            else {
+                                                Circle()
+                                                    .frame(width: 7,height: 7)
+                                                    .foregroundColor(.clear)
+                                                    .padding(.top, 60)
+                                            }
+                                        }
+                                        .padding(.top, -15)
+                                            .onTapGesture {
+                                                if !clicked {
+                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                    today = false
+                                                    clickedDates.removeAll()
+                                                    clickedDates.insert(getDate)
                                                 }
                                             }
                                     }
@@ -151,38 +212,66 @@ struct CalenderView: View {
                             } else {
                                 if clicked {
                                     ZStack {
-                                        Circle()
-                                            .foregroundColor(.gray)
-                                        CalenderItemView()
-                                            .overlay(
-                                                Text(String(day))
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(.white)
-                                            )
+                                        ZStack {
+                                            Circle()
+                                                .foregroundColor(.gray)
+                                            CalenderItemView()
+                                                .overlay(
+                                                    Text(String(day))
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(.white)
+                                                )
+                                        }
+                                        if todoValidation(for: day) {
+                                            Circle()
+                                                .frame(width: 7,height: 7)
+                                                .foregroundColor(Color("ColorGray"))
+                                                .padding(.top, 60)
+                                        } else {
+                                            Circle()
+                                                .frame(width: 7,height: 7)
+                                                .foregroundColor(.clear)
+                                                .padding(.top, 60)
+                                        }
+                                    }
+                                    .padding(.top, -15)
                                             .onTapGesture {
-                                                if clicked {
-                                                    clickedDates.remove(date)
-                                                }
-                                                else {
+                                                if !clicked {
+                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
                                                     today = false
                                                     clickedDates.removeAll()
-                                                    clickedDates.insert(date)
+                                                    clickedDates.insert(getDate)
                                                 }
                                             }
+                                    } else {
+                                    ZStack {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundColor(.clear)
+                                            CalenderItemView()
+                                                .overlay(
+                                                    Text(String(day))
+                                                )
+                                        }
+                                        if todoValidation(for: day) {
+                                            Circle()
+                                                .frame(width: 7,height: 7)
+                                                .foregroundColor(Color("ColorGray"))
+                                                .padding(.top, 60)
+                                        } else {
+                                            Circle()
+                                                .frame(width: 7,height: 7)
+                                                .foregroundColor(.clear)
+                                                .padding(.top, 60)
+                                        }
                                     }
-                                } else {
-                                    CalenderItemView()
-                                        .overlay(
-                                            Text(String(day))
-                                        )
+                                    .padding(.top, -15)
                                         .onTapGesture {
-                                            if clicked {
-                                                clickedDates.remove(date)
-                                            }
-                                            else {
+                                            if !clicked {
+                                                userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
                                                 today = false
                                                 clickedDates.removeAll()
-                                                clickedDates.insert(date)
+                                                clickedDates.insert(getDate)
                                             }
                                         }
                                     
@@ -205,6 +294,10 @@ struct CalenderView: View {
 }
 
 private extension CalenderView {
+    
+    private func todoValidation(for day: Int) -> Bool {
+        return todos.contains { $0.calenderDay == CalenderView.userDateFormatter.string(from: date)+String(day)}
+    }
     
     private func dateValidation() -> Bool {
         return Calendar.current.isDate(todayDate, equalTo: date, toGranularity: .year) &&
@@ -246,9 +339,15 @@ private extension CalenderView {
 
 // MARK: - Static 프로퍼티
 extension CalenderView {
-    static let dateFormatter: DateFormatter = {
+    static let calenderTitleDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
+        return formatter
+    }()
+    
+    static let userDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-"
         return formatter
     }()
     
@@ -260,5 +359,5 @@ extension CalenderView {
 // MARK: - PREVIEW
 
 #Preview {
-    CalenderView()
+    CalenderView(userCalenderDate: .constant("2024-04-24")).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

@@ -18,6 +18,8 @@ struct TodoView: View {
     @State var addItemButton: Bool = false
     @State var addTodo: String = ""
     
+    @Binding var userCalenderDate: String
+    
     var body: some View {
         VStack {
             HStack{
@@ -44,12 +46,14 @@ struct TodoView: View {
             List {
                 if !todos.isEmpty {
                     ForEach(self.todos, id: \.self) { todo in
-                        TodoItemView(todoTitle: todo.todo ?? "제목 없음")
+                        if todo.calenderDay == userCalenderDate {
+                            TodoItemView(todoTitle: todo.todo ?? "제목 없음")
+                        }
                     }
                     .onDelete(perform: deleteItems)
                 }
                 if addItemButton {
-                    AddTodoItemView(addTodo: $addTodo, addItemButton: $addItemButton)
+                    AddTodoItemView(addTodo: $addTodo, addItemButton: $addItemButton, userCalenderDate: $userCalenderDate)
                 }
             }
             .padding(.top, -7)
@@ -80,5 +84,5 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    return TodoView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    return TodoView(userCalenderDate: .constant("2024-04-24")).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

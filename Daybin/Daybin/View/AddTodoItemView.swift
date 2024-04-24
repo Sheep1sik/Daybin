@@ -11,6 +11,7 @@ struct AddTodoItemView: View {
     
     @Binding var addTodo: String
     @Binding var addItemButton: Bool
+    @Binding var userCalenderDate: String
     @State private var showingAlert = false
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -23,20 +24,23 @@ struct AddTodoItemView: View {
         if addItemButton {
             HStack {
                 TextField("to-do", text: $addTodo)
-                    .disableAutocorrection(false)
                     .frame(width: 300)
+                    .submitLabel(.done)
+                    .autocorrectionDisabled(true)
+                    .onSubmit {
+                        if addTodo == "" {
+                            showingAlert = true
+                        } else {
+                            addItem()
+                            addItemButton = !addItemButton
+                            addTodo = ""
+                            showingAlert = false
+                        }
+                    }
                 Spacer()
                 Button(action: {
-                    if addTodo == "" {
-                        showingAlert = true
-                    } else {
-                        addItem()
-                        addItemButton = !addItemButton
-                        addTodo = ""
-                        showingAlert = false
-                    }
                 }, label: {
-                    Image(systemName: "checkmark.square.fill")
+                    Image(systemName: "circle")
                         .resizable()
                         .frame(width: 25, height: 25)
                         .foregroundColor(Color("ColorGray"))
@@ -55,7 +59,7 @@ struct AddTodoItemView: View {
             let newItem = Todo(context: viewContext)
             newItem.id = UUID()
             newItem.todo = addTodo
-            newItem.calendarDay = "2024-04-23"
+            newItem.calenderDay = userCalenderDate
             
             do {
                 try viewContext.save()
@@ -68,5 +72,5 @@ struct AddTodoItemView: View {
 }
 
 #Preview {
-    AddTodoItemView(addTodo: .constant(""), addItemButton: .constant(true))
+    AddTodoItemView(addTodo: .constant(""), addItemButton: .constant(true), userCalenderDate: .constant("2024-04-24"))
 }

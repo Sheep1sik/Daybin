@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CalenderItemView: View {
-    
     var body: some View {
+        
         RoundedRectangle(cornerRadius: 5)
             .foregroundColor(Color.clear)
             .padding(.top, 20)

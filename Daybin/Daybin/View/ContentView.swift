@@ -10,16 +10,29 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State var userCalenderDate: String = ContentView.userDateFormatter.string(from: Date())
+    
     var body: some View {
-        CalenderView()
+        CalenderView(userCalenderDate: $userCalenderDate)
         
         Spacer()
         
         
-        TodoView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        TodoView(userCalenderDate: $userCalenderDate).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .frame(height: 240)
+        
     }
 }
+
+extension ContentView {
+    static let userDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+}
+
 #Preview {
-    return ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    return ContentView(userCalenderDate: "2024-04-24").environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
