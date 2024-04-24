@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Todo" representedClassName="Todo" syncable="YES" codeGenerationType="class">
-        <attribute name="calendarDay" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="todo" optional="YES" attributeType="String"/>
+        <attribute name="todoDay" optional="YES" attributeType="String"/>
+        <attribute name="todoMonth" optional="YES" attributeType="String"/>
+        <attribute name="todoTime" optional="YES" attributeType="String"/>
+        <attribute name="todoYear" optional="YES" attributeType="String"/>
     </entity>
 </model>

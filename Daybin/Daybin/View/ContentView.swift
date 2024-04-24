@@ -11,12 +11,13 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
-        Text("ContentView")
+        CalenderView()
         
         Spacer()
         
+        
         TodoView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .frame(height: 300)
+            .frame(height: 240)
     }
 }
 #Preview {
