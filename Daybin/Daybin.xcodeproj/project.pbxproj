@@ -19,6 +19,7 @@
 		E8460A0C2BD78BE300C197BA /* AddTodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A0B2BD78BE300C197BA /* AddTodoItemView.swift */; };
 		E8460A0E2BD7B32500C197BA /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A0D2BD7B32500C197BA /* CalenderView.swift */; };
 		E8460A142BD8CC4800C197BA /* CalenderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A132BD8CC4800C197BA /* CalenderItemView.swift */; };
+		E8460A162BDB887B00C197BA /* TodoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A152BDB887B00C197BA /* TodoScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E8460A0B2BD78BE300C197BA /* AddTodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoItemView.swift; sourceTree = "<group>"; };
 		E8460A0D2BD7B32500C197BA /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		E8460A132BD8CC4800C197BA /* CalenderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderItemView.swift; sourceTree = "<group>"; };
+		E8460A152BDB887B00C197BA /* TodoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				E8460A0B2BD78BE300C197BA /* AddTodoItemView.swift */,
 				E8460A0D2BD7B32500C197BA /* CalenderView.swift */,
 				E8460A132BD8CC4800C197BA /* CalenderItemView.swift */,
+				E8460A152BDB887B00C197BA /* TodoScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				E84609EB2BD6535B00C197BA /* TodoItemView.swift in Sources */,
 				E8460A0E2BD7B32500C197BA /* CalenderView.swift in Sources */,
 				E8460A0C2BD78BE300C197BA /* AddTodoItemView.swift in Sources */,
+				E8460A162BDB887B00C197BA /* TodoScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

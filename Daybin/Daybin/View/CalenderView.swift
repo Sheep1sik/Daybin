@@ -80,6 +80,7 @@ struct CalenderView: View {
             }
             Rectangle()
                 .frame(height: 1)
+                .foregroundColor(.gray)
             
             VStack {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 7), content: {

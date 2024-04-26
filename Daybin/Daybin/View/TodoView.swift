@@ -59,6 +59,8 @@ struct TodoView: View {
             .padding(.top, -7)
             .listStyle(.plain)
         }
+        .frame(height: UIScreen.main.bounds.height * 0.73)
+        Spacer()
     }
     
     private func deleteItems(offsets: IndexSet) {

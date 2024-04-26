@@ -14,13 +14,11 @@ struct ContentView: View {
     @State var userCalenderDate: String = ContentView.userDateFormatter.string(from: Date())
     
     var body: some View {
-        CalenderView(userCalenderDate: $userCalenderDate).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        
-        Spacer()
-        
-        
-        TodoView(userCalenderDate: $userCalenderDate).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .frame(height: 240)
+        ZStack {
+            CalenderView(userCalenderDate: $userCalenderDate).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            
+            TodoScrollView(userCalenderDate: $userCalenderDate).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
         
     }
 }
