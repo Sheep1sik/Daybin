@@ -14,7 +14,7 @@ struct ContentView: View {
     @State var userCalenderDate: String = ContentView.userDateFormatter.string(from: Date())
     
     var body: some View {
-        CalenderView(userCalenderDate: $userCalenderDate)
+        CalenderView(userCalenderDate: $userCalenderDate).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         
         Spacer()
         

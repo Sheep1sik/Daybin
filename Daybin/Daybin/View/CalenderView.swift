@@ -12,7 +12,7 @@ struct CalenderView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Todo.todo, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Todo.calenderDay, ascending: true)],
         animation: .default)
     private var todos: FetchedResults<Todo>
     
@@ -99,7 +99,7 @@ struct CalenderView: View {
                             
                         } else {
                             let getDate = getDate(for: index - firstWeekday)
-                            let day = index - firstWeekday + 1
+                            @State var day = index - firstWeekday + 1
                             let clicked = clickedDates.contains(getDate)
                             
                             if dateValidation() && day == Calendar.current.component(.day, from: todayDate){
@@ -131,7 +131,7 @@ struct CalenderView: View {
                                     .padding(.top, -15)
                                             .onTapGesture {
                                                 if !clicked {
-                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+formatterString(for: day)
                                                     today = false
                                                     clickedDates.removeAll()
                                                     clickedDates.insert(getDate)
@@ -167,7 +167,7 @@ struct CalenderView: View {
                                         .padding(.top, -15)
                                                 .onTapGesture {
                                                     if !clicked {
-                                                        userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                        userCalenderDate = CalenderView.userDateFormatter.string(from: date)+formatterString(for: day)
                                                         today = false
                                                         clickedDates.removeAll()
                                                         clickedDates.insert(getDate)
@@ -200,7 +200,7 @@ struct CalenderView: View {
                                         .padding(.top, -15)
                                             .onTapGesture {
                                                 if !clicked {
-                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+formatterString(for: day)
                                                     today = false
                                                     clickedDates.removeAll()
                                                     clickedDates.insert(getDate)
@@ -237,7 +237,7 @@ struct CalenderView: View {
                                     .padding(.top, -15)
                                             .onTapGesture {
                                                 if !clicked {
-                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                    userCalenderDate = CalenderView.userDateFormatter.string(from: date)+formatterString(for: day)
                                                     today = false
                                                     clickedDates.removeAll()
                                                     clickedDates.insert(getDate)
@@ -268,7 +268,7 @@ struct CalenderView: View {
                                     .padding(.top, -15)
                                         .onTapGesture {
                                             if !clicked {
-                                                userCalenderDate = CalenderView.userDateFormatter.string(from: date)+String(day)
+                                                userCalenderDate = CalenderView.userDateFormatter.string(from: date)+formatterString(for: day)
                                                 today = false
                                                 clickedDates.removeAll()
                                                 clickedDates.insert(getDate)
@@ -281,6 +281,7 @@ struct CalenderView: View {
                     }
                 })
             }
+            
             
             Spacer()
             
@@ -295,8 +296,12 @@ struct CalenderView: View {
 
 private extension CalenderView {
     
+    private func formatterString(for day: Int) -> String {
+        return day > 9 ? String(day) : "0\(day)"
+    }
+    
     private func todoValidation(for day: Int) -> Bool {
-        return todos.contains { $0.calenderDay == CalenderView.userDateFormatter.string(from: date)+String(day)}
+        return todos.contains { $0.calenderDay == CalenderView.userDateFormatter.string(from: date)+formatterString(for: day)}
     }
     
     private func dateValidation() -> Bool {
