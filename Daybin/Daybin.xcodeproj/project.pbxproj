@@ -20,6 +20,9 @@
 		E8460A0E2BD7B32500C197BA /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A0D2BD7B32500C197BA /* CalenderView.swift */; };
 		E8460A142BD8CC4800C197BA /* CalenderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A132BD8CC4800C197BA /* CalenderItemView.swift */; };
 		E8460A162BDB887B00C197BA /* TodoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A152BDB887B00C197BA /* TodoScrollView.swift */; };
+		E8460A182BDF627200C197BA /* ProfileSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A172BDF627200C197BA /* ProfileSettingView.swift */; };
+		E8460A1A2BDF641300C197BA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A192BDF641300C197BA /* ProfileView.swift */; };
+		E8460A1C2BDF6A6B00C197BA /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8460A1B2BDF6A6A00C197BA /* ProfileImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,9 @@
 		E8460A0D2BD7B32500C197BA /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		E8460A132BD8CC4800C197BA /* CalenderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderItemView.swift; sourceTree = "<group>"; };
 		E8460A152BDB887B00C197BA /* TodoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoScrollView.swift; sourceTree = "<group>"; };
+		E8460A172BDF627200C197BA /* ProfileSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingView.swift; sourceTree = "<group>"; };
+		E8460A192BDF641300C197BA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		E8460A1B2BDF6A6A00C197BA /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,9 @@
 				E8460A0D2BD7B32500C197BA /* CalenderView.swift */,
 				E8460A132BD8CC4800C197BA /* CalenderItemView.swift */,
 				E8460A152BDB887B00C197BA /* TodoScrollView.swift */,
+				E8460A172BDF627200C197BA /* ProfileSettingView.swift */,
+				E8460A192BDF641300C197BA /* ProfileView.swift */,
+				E8460A1B2BDF6A6A00C197BA /* ProfileImagePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,7 +184,10 @@
 			files = (
 				E8460A142BD8CC4800C197BA /* CalenderItemView.swift in Sources */,
 				E84609DC2BD64BB500C197BA /* Persistence.swift in Sources */,
+				E8460A182BDF627200C197BA /* ProfileSettingView.swift in Sources */,
 				E84609D52BD64BB300C197BA /* ContentView.swift in Sources */,
+				E8460A1A2BDF641300C197BA /* ProfileView.swift in Sources */,
+				E8460A1C2BDF6A6B00C197BA /* ProfileImagePicker.swift in Sources */,
 				E84609E82BD6511100C197BA /* TodoView.swift in Sources */,
 				E84609DF2BD64BB500C197BA /* Daybin.xcdatamodeld in Sources */,
 				E84609D32BD64BB300C197BA /* DaybinApp.swift in Sources */,
@@ -320,6 +332,7 @@
 				DEVELOPMENT_TEAM = 52YSN62MCL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(MARKETING_VERSION)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -350,6 +363,7 @@
 				DEVELOPMENT_TEAM = 52YSN62MCL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(MARKETING_VERSION)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

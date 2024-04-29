@@ -45,10 +45,7 @@ struct CalenderView: View {
         VStack {
             HStack {
                 // 프로필
-                Image("Profile")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-                    .clipShape(Circle())
+                ProfileView()
                 
                 Spacer()
                 
